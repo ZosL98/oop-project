@@ -20,7 +20,7 @@ class User extends Dbh {
         } else {
         
             $stm = parent::connect()->prepare("INSERT INTO uporabniki(username, password) VALUES(:username, :password)");
-            $stm->bindParam(":username", $this->username);
+            $stm->bindParam(":username", htmlspecialchars($this->username));
             $stm->bindParam(":password", sha1($this->password));
             $stm->execute();
             $stm = null;
